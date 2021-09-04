@@ -1,5 +1,30 @@
 var express = require("express");
 var router = express.Router();
+const jwt = require("jsonwebtoken");
+const keys = require("../../config/keys");
+
+router.get("/", function (req, res, next) {
+    const bearerToken = req.header("Authorization");
+
+    if (!bearerToken) {
+        return res
+            .status(400)
+            .json({ error: "Please sign in to view all posts" });
+    }
+
+    console.log(bearerToken);
+
+    const token = bearerToken.substring(7);
+
+    jwt.verify(token, keys.secretOrKey, (err, decoded) => {
+        if (err) {
+            console.log(err);
+            return res.status(400).json({ error: "Incorrect Token" });
+        }
+        console.log(decoded);
+        return res.status(200).json(posts);
+    });
+});
 
 const posts = [
     {
@@ -48,9 +73,5 @@ const posts = [
         author: "Some author 5",
     },
 ];
-
-router.get("/", function (req, res, next) {
-    res.json(posts);
-});
 
 module.exports = router;

@@ -3,12 +3,14 @@ import './signInPage.scss'
 import useInput from 'hooks/useInput'
 import { signInUserAction } from 'store/actions/authActions'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 const SignInPage = props => {
     const [email, emailInput, setEmail] = useInput({ name: 'email', label: 'Email' })
     const [password, passwordInput, setPassword] = useInput({ type: 'password', name: 'password', label: 'Password' })
 
     const dispatch = useDispatch()
+    const history = useHistory()
     const { errors } = useSelector(state => state.auth)
 
     const onFormSubmitHandler = event => {
@@ -18,6 +20,7 @@ const SignInPage = props => {
         setPassword('')
 
         dispatch(signInUserAction(user))
+        history.push('/')
     }
 
     return (

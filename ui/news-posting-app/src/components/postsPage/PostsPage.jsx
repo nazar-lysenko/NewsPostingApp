@@ -6,14 +6,15 @@ import { fetchAllPosts } from '../../store/actions/postsActions'
 
 const PostsPage = () => {
     const { posts } = useSelector(state => state.posts)
+    const { isAuthenticated } = useSelector(state => state.auth)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (!posts.length) {
-            dispatch(fetchAllPosts({ asd: 'asd' }))
+        if (!posts.length && isAuthenticated) {
+            dispatch(fetchAllPosts())
         }
-    }, [dispatch])
+    }, [dispatch, isAuthenticated, posts])
 
     return (
         <div className="post-container">

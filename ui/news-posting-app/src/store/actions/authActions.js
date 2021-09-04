@@ -18,6 +18,7 @@ export const signInUserAction = userData => dispatch => {
         .then(res => {
             const { token } = res.data
             localStorage.setItem('jwtToken', token)
+            console.log(token)
             setAuthToken(token)
             const decoded = jwtDecode(token)
             dispatch(setCurrentUser(decoded))

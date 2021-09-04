@@ -3,14 +3,22 @@ import './navigation.scss'
 import { icons } from '../../constants/globalConstants'
 import { ThemeContext } from '../../App'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { logoutUser } from 'store/actions/authActions'
 
 const Navigation = props => {
     const { onThemeButtonClickHandler, links } = props
     const [scrollPosition, setScrollPosition] = useState(0)
+    const { isAuthenticated } = useSelector(state => state.auth)
+    const dispatch = useDispatch()
 
     const onScrollHandler = () => {
         const position = window.pageYOffset
         setScrollPosition(position)
+    }
+
+    const onSignOutButtonClickHandler = () => {
+        dispatch(logoutUser())
     }
 
     useEffect(() => {
@@ -39,11 +47,17 @@ const Navigation = props => {
                 })}
             </div>
             <div className="navigation_sign-in">
-                <Link to="/signIn">
-                    <button className="navigation_sign-in_button">
-                        <span>Sign In</span>
+                {isAuthenticated ? (
+                    <button onClick={onSignOutButtonClickHandler} className="navigation_sign-in_button">
+                        <span>Sign Out</span>
                     </button>
-                </Link>
+                ) : (
+                    <Link to="/signIn">
+                        <button className="navigation_sign-in_button">
+                            <span>Sign In</span>
+                        </button>
+                    </Link>
+                )}
             </div>
             <div className="navigation_theme-switcher">
                 <div className="navigation_theme-switcher_image__wrapper" onClick={onThemeButtonClickHandler}>
