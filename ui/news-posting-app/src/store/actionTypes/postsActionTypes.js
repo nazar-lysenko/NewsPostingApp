@@ -1,0 +1,1 @@
+export const FETCH_ALL_POSTS = 'POST/FETCH_ALL'

@@ -1,0 +1,22 @@
+.post-container {
+    display: flex;
+    flex-direction: row;
+
+    &_main-content {
+        flex: 2;
+
+        &_post {
+            padding: 30px;
+            margin: 15px;
+        }
+    }
+
+    &_side-bar {
+        flex: 1;
+
+        &_item {
+            padding: 30px;
+            margin: 15px;
+        }
+    }
+}
