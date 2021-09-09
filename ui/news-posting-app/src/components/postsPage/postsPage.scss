@@ -5,6 +5,28 @@
     &_main-content {
         flex: 2;
 
+        &_action-items {
+            padding: 10px 15px;
+            background: #22303c;
+            border-radius: 5px;
+
+            &_new-post {
+                button {
+                    background: transparent;
+                    border: 1px solid white;
+                    border-radius: 5px;
+                    padding: 10px 15px;
+                    color: white;
+                }
+
+                button:hover {
+                    cursor: pointer;
+                    background: white;
+                    color: black;
+                }
+            }
+        }
+
         &_post {
             padding: 30px;
             margin: 15px;

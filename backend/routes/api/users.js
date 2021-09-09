@@ -9,27 +9,6 @@ const validateLoginInput = require("../../validation/login");
 
 const User = require("../../models/User");
 
-router.get("/info", (req, res) => {
-    const bearerToken = req.header("Authorization");
-
-    if (!bearerToken) {
-        return res.status(400).json({ error: "You are not signed in" });
-    }
-
-    const token = bearerToken.substring(7);
-
-    console.log(token);
-
-    jwt.verify(token, keys.secretOrKey, (err, decoded) => {
-        if (err) {
-            console.log(err);
-            return res.status(400).json({ error: "invalid token" });
-        }
-        console.log(decoded);
-        return res.status(200).json({ info: "OKK" });
-    });
-});
-
 router.post("/login", (req, res) => {
     const { errors, isValid } = validateLoginInput(req.body);
 
@@ -52,6 +31,7 @@ router.post("/login", (req, res) => {
                 const payload = {
                     id: user.id,
                     login: user.login,
+                    role: user.role,
                 };
 
                 jwt.sign(

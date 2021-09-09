@@ -1,7 +1,7 @@
 import React from 'react'
 import useInput from 'hooks/useInput'
 import { useSelector, useDispatch } from 'react-redux'
-import { signUpUserAction } from '../../store/actions/authActions'
+import { signUpUserAction } from '../../store/actions/userActions'
 import { useHistory } from 'react-router-dom'
 
 const SignUpPage = () => {
@@ -14,7 +14,7 @@ const SignUpPage = () => {
         label: 'Repeat your Password',
     })
 
-    const { errors } = useSelector(state => state.auth)
+    const { errors } = useSelector(state => state.user)
     const history = useHistory()
     const dispatch = useDispatch()
 

@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-const PostsService = {
-    fetchAllPosts: () => {
-        return axios.get('/api/posts')
-    },
+export const fetchAllPosts = () => {
+    return axios.get('/api/posts')
 }
 
-export default PostsService
+export const createNewPost = payload => {
+    return axios.post('/api/posts/create', payload)
+}

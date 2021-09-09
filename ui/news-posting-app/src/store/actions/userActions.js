@@ -1,5 +1,5 @@
 import { signUpUser, signInUser, setAuthToken } from 'services/authService'
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from '../actionTypes/authActionTypes'
+import { GET_ERRORS, SET_CURRENT_USER } from '../actionTypes/userActionTypes'
 import jwtDecode from 'jwt-decode'
 
 export const signUpUserAction = (userData, history) => dispatch => {
@@ -36,10 +36,6 @@ export const setCurrentUser = decoded => {
         type: SET_CURRENT_USER,
         payload: decoded,
     }
-}
-
-export const setUserLoading = () => {
-    return { type: USER_LOADING }
 }
 
 export const logoutUser = () => dispatch => {

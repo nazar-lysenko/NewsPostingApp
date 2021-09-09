@@ -4,12 +4,12 @@ import { icons } from '../../constants/globalConstants'
 import { ThemeContext } from '../../App'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { logoutUser } from 'store/actions/authActions'
+import { logoutUser } from 'store/actions/userActions'
 
 const Navigation = props => {
     const { onThemeButtonClickHandler, links } = props
     const [scrollPosition, setScrollPosition] = useState(0)
-    const { isAuthenticated } = useSelector(state => state.auth)
+    const { isAuthenticated } = useSelector(state => state.user)
     const dispatch = useDispatch()
 
     const onScrollHandler = () => {

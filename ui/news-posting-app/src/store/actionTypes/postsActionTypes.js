@@ -1,1 +1,2 @@
 export const FETCH_ALL_POSTS = 'POST/FETCH_ALL'
+export const CREATE_NEW_POST = 'POST/CREATE_NEW'

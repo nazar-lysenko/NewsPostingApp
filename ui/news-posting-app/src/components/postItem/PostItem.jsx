@@ -13,9 +13,7 @@ const PostItem = props => {
                 <img src={imageUrl} alt="" />
             </div>
             <div className="post-item_details">
-                <div className="post-item_details_description">
-                    <p>{description}</p>
-                </div>
+                <div className="post-item_details_description" dangerouslySetInnerHTML={{ __html: description }}></div>
                 <div className="post-item_details_author">{author}</div>
             </div>
         </div>

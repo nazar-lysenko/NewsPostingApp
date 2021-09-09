@@ -2,29 +2,36 @@ var express = require("express");
 var router = express.Router();
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
+const passport = require("passport");
+const Post = require("../../models/Post");
 
-router.get("/", function (req, res, next) {
-    const bearerToken = req.header("Authorization");
-
-    if (!bearerToken) {
-        return res
-            .status(400)
-            .json({ error: "Please sign in to view all posts" });
-    }
-
-    console.log(bearerToken);
-
-    const token = bearerToken.substring(7);
-
-    jwt.verify(token, keys.secretOrKey, (err, decoded) => {
-        if (err) {
-            console.log(err);
-            return res.status(400).json({ error: "Incorrect Token" });
-        }
-        console.log(decoded);
-        return res.status(200).json(posts);
-    });
+router.get("/", (req, res) => {
+    Post.find({})
+        .then((posts) => {
+            res.status(200).json(posts);
+        })
+        .catch((err) => console.log(err));
 });
+
+router.post(
+    "/create",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+        console.log(req.body.title);
+
+        const newPost = new Post({
+            title: req.body.title,
+            imageUrl: req.body.imageUrl,
+            description: req.body.description,
+            author: req.body.author,
+        });
+
+        newPost
+            .save()
+            .then(() => res.status(200).json("Post created successfully"))
+            .catch((err) => console.log(err));
+    }
+);
 
 const posts = [
     {

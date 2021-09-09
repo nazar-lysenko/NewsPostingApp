@@ -9,8 +9,9 @@ import ProfilePage from 'components/profilePage/ProfilePage'
 import { setAuthToken } from 'services/authService'
 import jwtDecode from 'jwt-decode'
 import { useDispatch } from 'react-redux'
-import { logoutUser, setCurrentUser } from 'store/actions/authActions'
+import { logoutUser, setCurrentUser } from 'store/actions/userActions'
 import PrivateRoute from 'components/privateRoute/PrivateRoute'
+import PostCreationComponent from 'components/postCreationComponent/PostCreationComponent'
 
 const themes = {
     light: 'light-theme',
@@ -61,6 +62,7 @@ const App = () => {
                             <AuthPage isSignedUpProp={false} />
                         </Route>
                         <PrivateRoute path="/profile" component={ProfilePage} />
+                        <PrivateRoute path="/posts/create" component={PostCreationComponent} />
                         <Route path="/">
                             <PostsPage />
                         </Route>
